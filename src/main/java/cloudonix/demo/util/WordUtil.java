@@ -19,7 +19,7 @@ import java.util.TreeSet;
 @Slf4j
 public class WordUtil {
 
-	public String totalCharacterValue(String text) {
+	public int totalCharacterValue(String text) {
 
 		int S = 0;
 		String textLowercase = text.toLowerCase();
@@ -27,7 +27,7 @@ public class WordUtil {
 		for (int i = 0; i < textLowercase.length(); i++) {
 			S += text.charAt(i) - 'a' + 1;
 		}
-		return Integer.toString(S);
+		return S;
 	}
 
 	public BufferedWriter appendWordToFile(String fileName, String str) {

@@ -10,10 +10,8 @@ import io.vertx.ext.web.Router;
 import io.vertx.ext.web.RoutingContext;
 import io.vertx.ext.web.handler.BodyHandler;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Service;
 
 @Slf4j
-@Service
 public class RestService extends AbstractVerticle {
 
 	private final TextLettersValidator textLettersValidator = new TextLettersValidator();

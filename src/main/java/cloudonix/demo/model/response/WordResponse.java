@@ -9,6 +9,6 @@ import lombok.Setter;
 @Builder
 public class WordResponse {
 
-	private String value;
+	private Integer value;
 	private String lexical;
 }

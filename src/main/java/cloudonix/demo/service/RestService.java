@@ -9,7 +9,8 @@ import io.vertx.core.json.Json;
 import io.vertx.ext.web.Router;
 import io.vertx.ext.web.RoutingContext;
 import io.vertx.ext.web.handler.BodyHandler;
-import lombok.extern.slf4j.Slf4j;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.Objects;
 
@@ -27,10 +28,11 @@ import static cloudonix.demo.constant.WordConstant.NEW_LINE;
 import static cloudonix.demo.constant.WordConstant.PATH;
 import static cloudonix.demo.constant.WordConstant.PORT;
 
-@Slf4j
 public class RestService extends AbstractVerticle {
 
 	private final TextLettersValidator textLettersValidator = new TextLettersValidator();
+	private static final Logger log = LogManager.getLogger(RestService.class);
+
 
 
 	@Override

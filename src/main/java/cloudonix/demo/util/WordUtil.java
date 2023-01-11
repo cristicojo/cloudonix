@@ -1,7 +1,9 @@
 package cloudonix.demo.util;
 
+import cloudonix.demo.service.RestService;
 import lombok.experimental.UtilityClass;
-import lombok.extern.slf4j.Slf4j;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -24,8 +26,9 @@ import static cloudonix.demo.constant.LoggerConstant.WRITE_WORD_TO_FILE_EXCEPTIO
 import static cloudonix.demo.constant.WordConstant.A;
 
 @UtilityClass
-@Slf4j
 public class WordUtil {
+
+	private static final Logger log = LogManager.getLogger(RestService.class);
 
 	public int totalCharacterValue(String text) {
 

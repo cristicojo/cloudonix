@@ -31,20 +31,20 @@ import static cloudonix.demo.constant.WordConstant.PORT;
 public class RestService extends AbstractVerticle {
 
 	private final TextLettersValidator textLettersValidator = new TextLettersValidator();
-	private static final Logger log = LogManager.getLogger(RestService.class);
+	private static final Logger LOG = LogManager.getLogger(RestService.class);
 
 
 
 	@Override
 	public void start(Promise<Void> promise) {
 
-		log.debug(POST_REQUEST);
+		LOG.debug(POST_REQUEST);
 		Router router = Router.router(vertx);
 		router.route().failureHandler(this::handleFailure);
 		router.route(PATH).handler(BodyHandler.create());
 		router.post(PATH).handler(this::createWord);
 
-		log.debug(CREATE_HTTP_SERVER);
+		LOG.debug(CREATE_HTTP_SERVER);
 		vertx.createHttpServer()
 				.requestHandler(router)
 				.listen(config().getInteger(HTTP_PORT, PORT),
@@ -59,7 +59,7 @@ public class RestService extends AbstractVerticle {
 	}
 
 	private void handleFailure(RoutingContext routingContext) {
-		log.error(REQUEST_EXCEPTION);
+		LOG.error(REQUEST_EXCEPTION);
 		routingContext.response()
 				.putHeader(CONTENT_TYPE, APPLICATION_JSON)
 				.setStatusCode(500)
@@ -68,7 +68,7 @@ public class RestService extends AbstractVerticle {
 
 	private void createWord(RoutingContext routingContext) {
 
-		log.debug(CREATE_WORD, routingContext.body().asJsonObject().getString(KEY));
+		LOG.debug(CREATE_WORD, routingContext.body().asJsonObject().getString(KEY));
 		String textValue = routingContext.body().asJsonObject().getString(KEY);
 		textLettersValidator.validateRequestBody(textValue);
 
@@ -79,7 +79,7 @@ public class RestService extends AbstractVerticle {
 				.lexical(Objects.isNull(bufferedWriter) ? null : WordUtil.findLexical(FILENAME, textValue))
 				.build();
 
-		log.debug(WORD_RESPONSE, wordResponse);
+		LOG.debug(WORD_RESPONSE, wordResponse);
 		routingContext.response()
 				.setStatusCode(201)
 				.putHeader(CONTENT_TYPE, APPLICATION_JSON)

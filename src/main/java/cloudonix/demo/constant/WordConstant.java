@@ -12,4 +12,5 @@ public class WordConstant {
 	public static final String NEW_LINE = "\n";
 	public static final Character A = 'a';
 	public static final String ONLY_LETTERS_EXCEPTION = "Only letters accepted";
+	public static final String EMPTY_STRING = "";
 }

@@ -1,5 +1,6 @@
 package cloudonix.demo.service;
 
+import cloudonix.demo.model.response.ResponseException;
 import cloudonix.demo.model.response.WordResponse;
 import cloudonix.demo.util.WordUtil;
 import cloudonix.demo.validator.TextLettersValidator;
@@ -25,6 +26,7 @@ import static cloudonix.demo.constant.WordConstant.FILENAME;
 import static cloudonix.demo.constant.WordConstant.HTTP_PORT;
 import static cloudonix.demo.constant.WordConstant.KEY;
 import static cloudonix.demo.constant.WordConstant.NEW_LINE;
+import static cloudonix.demo.constant.WordConstant.ONLY_LETTERS_EXCEPTION;
 import static cloudonix.demo.constant.WordConstant.PATH;
 import static cloudonix.demo.constant.WordConstant.PORT;
 
@@ -59,11 +61,16 @@ public class RestService extends AbstractVerticle {
 	}
 
 	private void handleFailure(RoutingContext routingContext) {
+
+		ResponseException responseException = ResponseException.builder()
+				.message(ONLY_LETTERS_EXCEPTION)
+				.build();
+
 		LOG.error(REQUEST_EXCEPTION);
 		routingContext.response()
 				.putHeader(CONTENT_TYPE, APPLICATION_JSON)
 				.setStatusCode(500)
-				.end(routingContext.failure().getMessage());
+				.end(Json.encodePrettily(responseException));
 	}
 
 	private void createWord(RoutingContext routingContext) {
